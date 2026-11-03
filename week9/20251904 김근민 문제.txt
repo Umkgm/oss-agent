@@ -1,0 +1,16 @@
+1. 수락 - README.md를 써달라고 했기 때문
+2. 거절 - 설명만 해달라고 했기 때문에 
+3. 수락 - 설명을 하기 위해 pip install pandas 실행과 가상환경 실행을 하기 위해서
+4. 거절 - 다른 문서 파일 읽기여서
+5. 수락 - 오타난 단어 고치기
+6. 거절 - 오래된 파일이라는게 정리할 파일은 아님
+
+1. Glob 	week9*/**/*
+2. Glob 	wee9*/**/*
+3. Read	C:\oss-agent\week9\week9-sample\average_pandas.py
+4. Read	C:\oss-agent\week9\week9-sample\average_plain.py
+5. Read	C:\oss-agent\week9\week9-sample\check.py
+6. Read	C:\oss-agent\week9\week9-sample\scores.csv
+
+도구 사용 횟수 6회
+읽은 파일 수 4/4
