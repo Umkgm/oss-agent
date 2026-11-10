@@ -117,7 +117,7 @@ def run(question):
 
 
 if __name__ == "__main__":
-    question = ("2026년 11월 8일 박스오피스 1위 영화는 뭐고, "
+    question = ("2026년 11월 8일 박스오피스 2위 영화는 뭐고, "
                 "그 영화를 그날 몇 명이 봤어?")
     print("질문:", question)
     print("최종 답:", run(question))
