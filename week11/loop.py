@@ -80,20 +80,20 @@ def run(question):
 
         if not message.get("tool_calls"):   # 도구 호출이 없으면 최종 답
             return message.get("content")
-
+        
         for call in message["tool_calls"]:
             # [빈칸 1] 응답에서 도구 이름과 인자 꺼내기
             #   call 안에서 도구 이름(name)과 인자(args)를 꺼낸다
             #   인자는 글자(JSON 문자열)로 오므로 json.loads 로 딕셔너리로 바꾼다
-            name = None
-            args = None
+            name = call["function"]["name"]
+            args = json.loads(call["function"]["arguments"])
             if name is None or args is None:
                 stop_at_blank(1, "88, 89", '아래 { … } 전체가 변수 call 임. call["칸 이름"] 으로 한 겹씩 꺼낼 것.', call)
             print(f"  도구 호출: {name} {args}")
 
             # [빈칸 2] 이름으로 함수를 찾기
             #   FUNCTIONS 사전에서 name 에 해당하는 함수를 꺼내 func 에 담는다
-            func = None
+            func = FUNCTIONS.get(name)
             if func is None:
                 stop_at_blank(2, "96", f"FUNCTIONS 사전에서 '{name}' 함수를 꺼내 func 에 담을 것.")
             result = func(**args)
@@ -102,7 +102,12 @@ def run(question):
             # [빈칸 3] 결과를 대화에 다시 넣기
             #   role 은 "tool", 어느 호출의 결과인지(tool_call_id),
             #   도구 이름(name), 결과(content)
-            tool_message = None
+            tool_message = {
+                "role": "tool",
+                "tool_call_id": call["id"],
+                "name": name,
+                "content": result,
+            }
             if tool_message is None:
                 stop_at_blank(3, "105", "결과를 대화에 넣을 메시지를 만들 것. "
                                            "넣지 않으면 모델은 결과를 모름.")
