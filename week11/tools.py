@@ -3,8 +3,12 @@
 쓰는 곳: 11주차 에이전트 루프, 12주차 스킬, 14주차 공개
 필요한 것: requests, secret.py 의 API_KEY
 """
+import json
+import tools
 import requests
 from secret import API_KEY
+
+MAX_TURNS = 5
 
 BASE_URL = ("https://www.kobis.or.kr/kobisopenapi/webservice/rest/"
             "boxoffice/searchDailyBoxOfficeList.json")

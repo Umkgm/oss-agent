@@ -9,10 +9,9 @@ import tools
 from secret import GEMINI_API_KEY
 
 # ---------- 설정 ----------
-URL = ("https://generativelanguage.googleapis.com/"
-       "v1beta/openai/chat/completions")
-MODEL = "gemini-3.5-flash-lite"
-MAX_TURNS = 5          # 반복 상한. 이 바퀴 수를 넘기면 멈춘다
+URL = ("http://localhost:11434/v1/chat/completions")
+MODEL = "qwen3:0.6b"
+MAX_TURNS = 5         # 반복 상한. 이 바퀴 수를 넘기면 멈춘다
 
 # ---------- 도구 목록: 모델에게 보여 줄 설명 ----------
 TOOLS = [
@@ -93,7 +92,7 @@ def run(question):
 
             # [빈칸 2] 이름으로 함수를 찾기
             #   FUNCTIONS 사전에서 name 에 해당하는 함수를 꺼내 func 에 담는다
-            func = FUNCTIONS.get(name)
+            func = FUNCTIONS[name]
             if func is None:
                 stop_at_blank(2, "96", f"FUNCTIONS 사전에서 '{name}' 함수를 꺼내 func 에 담을 것.")
             result = func(**args)
@@ -117,7 +116,6 @@ def run(question):
 
 
 if __name__ == "__main__":
-    question = ("2026년 11월 8일 박스오피스 2위 영화는 뭐고, "
-                "그 영화를 그날 몇 명이 봤어?")
+    question = ("2026년 11월 8일 1위와 그날 관객 수")
     print("질문:", question)
     print("최종 답:", run(question))
